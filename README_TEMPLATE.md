@@ -23,6 +23,27 @@
 
 {{PROJECT_NAME}} 是一个面向 {{TARGET_USER}} 的 {{PROJECT_TYPE}}。当 {{USER_SITUATION}} 时，它会 {{CORE_OUTCOME}}。
 
+<!-- Agent Skill 项目必填。放在首屏承诺之后、详细说明之前。
+     单 Skill 仓库（根目录有 SKILL.md）用下面这段；非 Skill 项目删除本节，不要留下空标题。
+     多 Skill 合集改用 npx skills add {{GITHUB_OWNER}}/{{REPO}}@{{SKILL_NAME}} -g -y，或写明要复制的子目录。
+     已有分步安装可以保留在「快速开始」，但不能替代这段。 -->
+## 安装
+
+克隆到 Claude Code 的 skills 目录：
+
+```bash
+git clone https://github.com/{{GITHUB_OWNER}}/{{REPO}}.git \
+  ~/.claude/skills/{{SKILL_NAME}}
+```
+
+或使用 Skills CLI，安装到当前检测到的 Agent：
+
+```bash
+npx skills add {{GITHUB_OWNER}}/{{REPO}} -g -y
+```
+
+安装后重启客户端。其他 Agent 环境可以直接把 [`SKILL.md`](SKILL.md) 作为 skill 入口加载。
+
 ## 演示
 
 <!-- 可选。优先放 30–90 秒短视频、动图或一张能证明核心结果的截图。 -->
@@ -44,6 +65,8 @@
 - **{{FEATURE_3_NAME}}** — {{FEATURE_3_RESULT}}
 
 ## 快速开始
+
+<!-- Skill 项目的一键安装用上面的「安装」节。这里写装好之后怎么用，或补充 ZIP / 各客户端目录等分步说明。 -->
 
 ### {{INSTALL_OR_OPEN_METHOD}}
 

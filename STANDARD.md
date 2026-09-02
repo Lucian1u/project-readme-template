@@ -38,6 +38,12 @@ README 的顺序按这四个问题组织，不按开发者写代码的时间顺�
 
 不适用的章节直接删掉，不保留空标题，也不写“敬请期待”。
 
+Agent Skill 项目额外必填：
+
+11. 可复制的安装入口
+
+只给 ZIP 下载、解压路径或分步说明不够。打开仓库的人必须能复制一条命令、粘贴后完成安装。
+
 ## 内容规则
 
 ### 首屏只做三件事
@@ -53,6 +59,42 @@ README 的顺序按这四个问题组织，不按开发者写代码的时间顺�
 ### 所有命令都要跑过
 
 安装、启动和验收命令必须在当前版本实际执行过。复制即报错的 Quick Start 比没有 Quick Start 更糟。
+
+### Agent Skill 必须提供可复制安装入口
+
+Skill 仓库的读者首先要能装上它。这段放在首屏承诺之后、详细说明之前，让打开页面不用往下翻就能复制。已有的分步安装（ZIP、各客户端目录）可以保留在后面，但不能替代这段。
+
+单 Skill 仓库（根目录有 `SKILL.md`）使用下面这段，只替换仓库地址和目录名：
+
+````markdown
+## 安装
+
+克隆到 Claude Code 的 skills 目录：
+
+```bash
+git clone https://github.com/{{OWNER}}/{{REPO}}.git \
+  ~/.claude/skills/{{SKILL_NAME}}
+```
+
+或使用 Skills CLI，安装到当前检测到的 Agent：
+
+```bash
+npx skills add {{OWNER}}/{{REPO}} -g -y
+```
+
+安装后重启客户端。其他 Agent 环境可以直接把 [`SKILL.md`](SKILL.md) 作为 skill 入口加载。
+````
+
+写法规则：
+
+- `{{SKILL_NAME}}` 必须与 `SKILL.md` frontmatter 里的 `name` 一致，不要让用户自己改文件夹名
+- 命令必须完整，复制后不需要再拼路径
+- 至少提供两条可复制命令：`git clone` 到 `~/.claude/skills/<name>`，以及 `npx skills add owner/repo -g -y`
+- `git clone` 直装 Claude Code；`npx skills add -g -y` 是跨 Agent 的标准入口，会装到用户级的 Claude Code、Codex、Cursor 等目录，并跳过确认
+- `-g` 与 `git clone` 一样装到用户级目录；`-y` 保证复制后可以直接执行，不要让用户再回答提示
+- 多 Skill 合集不要把整个仓库克隆进单个 skill 目录；改用 `npx skills add owner/repo@skill-name -g -y`，或写明要复制的子目录
+- 安装命令必须在当前版本实际执行过
+- 不要只写“下载后放到 skills 目录”而不给可复制命令
 
 ### 把边界写在项目页上
 
@@ -92,6 +134,7 @@ README 之外，每个公开项目还应检查：
 
 - 不看源码也能说清项目用途和目标用户
 - 主要入口在首屏可见且链接有效
+- Agent Skill 项目有可直接复制的安装命令，且命令已在当前版本执行过
 - Quick Start 已在当前版本跑通
 - 至少一个示例能得到描述中的结果
 - 核心能力都能在仓库、演示或验收记录中找到证据
